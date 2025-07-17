@@ -1,16 +1,18 @@
-const rateLimit = require('express-rate-limit')
+// server/middleware/rateLimiter.js
+
+const rateLimit = require('express-rate-limit');
 
 // General API rate limiter
 const apiLimiter = rateLimit({
-  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS) || 15 * 60 * 1000, // 15 minutes
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS) || 100, // limit each IP to 100 requests per windowMs
+  windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS, 10) || 15 * 60 * 1000, // 15 minutes
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS, 10) || 100, // limit each IP to 100 requests per windowMs
   message: {
     success: false,
-    error: 'Too many requests from this IP, please try again later.'
+    error: 'Too many requests from this IP, please try again later.',
   },
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
-})
+});
 
 // Strict limiter for auth endpoints
 const authLimiter = rateLimit({
@@ -19,9 +21,9 @@ const authLimiter = rateLimit({
   skipSuccessfulRequests: true, // Don't count successful requests
   message: {
     success: false,
-    error: 'Too many authentication attempts, please try again later.'
-  }
-})
+    error: 'Too many authentication attempts, please try again later.',
+  },
+});
 
 // File upload limiter
 const uploadLimiter = rateLimit({
@@ -29,9 +31,8 @@ const uploadLimiter = rateLimit({
   max: 20, // limit each IP to 20 uploads per hour
   message: {
     success: false,
-    error: 'Too many file uploads, please try again later.'
-  }
-})
+    error: 'Too many file uploads, please try again later.',
+  },
+});
 
-module.exports = { apiLimiter, authLimiter, uploadLimiter }
-module.exports = apiLimiter // Default export
+module.exports = { apiLimiter, authLimiter, uploadLimiter };
