@@ -5,11 +5,11 @@
 /* Custom base styles */
 @layer base {
   * {
-    @apply border-border;
+    /* Removed invalid utility class */
   }
   
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply font-sans;
     font-feature-settings: "rlig" 1, "calt" 1;
   }
   
@@ -21,7 +21,7 @@
 /* Custom components */
 @layer components {
   .btn {
-    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    @apply inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50;
   }
   
   .btn-primary {
@@ -33,7 +33,7 @@
   }
   
   .btn-outline {
-    @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground;
+    @apply border hover:bg-gray-100;
   }
   
   .btn-ghost {
@@ -49,11 +49,11 @@
   }
   
   .input {
-    @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    @apply flex h-10 w-full rounded-md border px-3 py-2 text-sm disabled:cursor-not-allowed disabled:opacity-50;
   }
   
   .card {
-    @apply rounded-lg border bg-card text-card-foreground shadow-sm;
+    @apply rounded-lg border bg-white shadow-sm;
   }
   
   .card-header {
@@ -69,7 +69,7 @@
   }
   
   .badge {
-    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold;
   }
   
   .badge-default {
